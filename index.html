@@ -24,7 +24,6 @@
     background: var(--board-dark);
     color: var(--chalk);
     font-family: 'Inter', sans-serif;
-    overflow-x:hidden;
   }
 
   /* chalk texture */
@@ -54,6 +53,7 @@
     background: var(--board) url('chalkboard_hero_bg.png') no-repeat center center;
     background-size: cover;
     border-bottom: 14px solid var(--wood-dark);
+    overflow-x: hidden;
   }
   .hero::after{
     content:"";
@@ -238,12 +238,15 @@
 
 
   /* SECTIONS */
-  main{ position:relative; z-index:1; }
+  main{ position:relative; z-index:1; overflow-x: hidden; }
   .section{
     padding: 90px 20px 50px;
     max-width: 860px;
     margin: 0 auto;
     scroll-margin-top: 70px;
+  }
+  @media (max-width: 768px) {
+    .section { scroll-margin-top: 155px; }
   }
   .section-head{
     display:flex;
