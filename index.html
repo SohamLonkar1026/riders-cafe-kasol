@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riders Cafe Kasol — Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --board: #1a1a1a;
+    --board-dark: #0f0f0f;
+    --chalk: #f0f0f0;
+    --chalk-dim: #b0b0b0;
+    --wood: #333333;
+    --wood-dark: #222222;
+    --accent: #FFC107;
+    --accent-soft: #ffdf70;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: var(--board-dark);
+    color: var(--chalk);
+    font-family: 'Inter', sans-serif;
+    overflow-x:hidden;
+  }
+
+  /* texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 2px 4px;
+    pointer-events:none;
+    z-index: 0;
+    opacity:0.6;
+  }
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height: 92vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 40px 20px;
+    background: var(--board);
+    background-size: cover;
+    border-bottom: 14px solid var(--wood-dark);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle, rgba(20,20,20,0.25) 20%, rgba(20,20,20,0.7) 100%),
+      radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: auto, 4px 4px;
+    opacity:0.9;
+    z-index: 0;
+  }
+  .eyebrow{
+    font-family:'Caveat', cursive;
+    font-size: clamp(22px,3vw,30px);
+    color: var(--accent-soft);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    position:relative; z-index:1;
+    transform: rotate(-2deg);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+  }
+  .hero h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: clamp(46px, 8vw, 96px);
+    line-height: 0.95;
+    margin: 0 0 14px;
+    position:relative; z-index:1;
+    letter-spacing: -1px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+  }
+  .hero h1 .script{
+    display:block;
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-style:normal;
+    font-size: clamp(36px,6vw,64px);
+    color: var(--accent);
+    margin-top: 6px;
+    transform: rotate(-1.5deg);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  }
+  .hero p.tag{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--chalk-dim);
+    font-size: clamp(16px, 2.5vw, 22px);
+    max-width: 440px;
+    margin: 0 auto 36px;
+    position:relative; z-index:1;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    line-height: 1.4;
+  }
+  .scroll-cue{
+    position:relative; z-index:1;
+    font-family:'Caveat', cursive;
+    font-size: clamp(32px, 6vw, 48px);
+    color: var(--chalk-dim);
+    text-decoration: none;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    animation: bob 2.2s ease-in-out infinite;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  .scroll-cue:hover{
+    color: var(--accent-soft);
+  }
+  .scroll-cue svg{ width:26px; height:26px; }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+
+  .call-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .call-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    font-family: 'Fraunces', serif;
+    font-size: clamp(16px, 2.5vw, 20px);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 99px;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+  .call-btn:hover {
+    background: rgba(255,193,7,0.08);
+    color: var(--accent-soft);
+    border-color: var(--accent-soft);
+    transform: translateY(-2px);
+  }
+  .call-btn svg { width: 18px; height: 18px; }
+
+  .bottom-call {
+    text-align: center;
+    padding: 30px 20px 0;
+    margin-top: 10px;
+  }
+
+  /* NAV */
+  .nav{
+    position: sticky; top:0; z-index: 50;
+    background: var(--wood-dark);
+    border-bottom: 4px solid var(--wood);
+    overflow-x:auto;
+    white-space:nowrap;
+    -ms-overflow-style:none; scrollbar-width:none;
+  }
+  .nav::-webkit-scrollbar{display:none;}
+  .nav-inner{
+    display:inline-flex;
+    gap: 6px;
+    padding: 14px 18px;
+  }
+  .nav a{
+    font-family:'Caveat', cursive;
+    font-size: 20px;
+    color: var(--chalk-dim);
+    text-decoration:none;
+    padding: 7px 16px;
+    border: 1.5px dashed transparent;
+    border-radius: 999px;
+    transition: all .2s ease;
+    flex-shrink:0;
+  }
+  .nav a:hover, .nav a.active{
+    color: var(--accent-soft);
+    border-color: rgba(255,193,7,0.5);
+    background: rgba(255,193,7,0.08);
+  }
+
+  @media (max-width: 768px){
+    .nav{
+      overflow-x: visible;
+      white-space: normal;
+    }
+    .nav-inner{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      padding: 10px 14px;
+    }
+    .nav a{
+      font-size: 16px;
+      padding: 6px 4px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: normal;
+      line-height: 1.1;
+      border-radius: 8px;
+      min-height: 42px;
+    }
+  }
+
+  /* SECTIONS */
+  main{ position:relative; z-index:1; }
+  .section{
+    padding: 90px 20px 50px;
+    max-width: 860px;
+    margin: 0 auto;
+    scroll-margin-top: 70px;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .section-num{
+    font-family:'Caveat', cursive;
+    color: var(--accent);
+    font-size: 22px;
+  }
+  .section h2{
+    font-family:'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(34px,5vw,52px);
+    margin:0;
+    letter-spacing:-0.5px;
+  }
+  .section .sub{
+    font-family:'Caveat', cursive;
+    color: var(--chalk-dim);
+    font-size: 19px;
+    margin: 0 0 36px;
+    transform: rotate(-0.5deg);
+  }
+  .divider{
+    border:none;
+    border-top: 1.5px dashed rgba(238,243,238,0.18);
+    margin: 0 0 36px;
+  }
+
+  .section h3{
+    font-family:'Fraunces', serif;
+    color: var(--accent-soft);
+    font-size: 24px;
+    font-weight: 500;
+    margin: 40px 0 16px;
+    letter-spacing: -0.3px;
+  }
+  .section h3:first-of-type {
+    margin-top: 10px;
+  }
+
+  .menu-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 80px;
+  }
+  @media (max-width: 640px){
+    .menu-grid{ 
+      grid-template-columns: 1fr 1fr; 
+      gap: 16px 32px; 
+    }
+    .item .name { font-size: 14.5px; }
+    .item .price { font-size: 16px; }
+    .item .name .note { font-size: 10px; }
+  }
+
+  .item{
+    display:flex;
+    align-items:baseline;
+    gap: 10px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(238,243,238,0.08);
+    opacity:0;
+    transform: translateY(14px);
+    animation: rise .6s ease forwards;
+  }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0);} }
+
+  .item .name{
+    font-family:'Fraunces', serif;
+    font-size: 17.5px;
+    font-weight:500;
+    color: var(--chalk);
+  }
+  .item .name .note{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    color: var(--chalk-dim);
+    font-weight:400;
+    margin-top:2px;
+  }
+  .item .fill{
+    flex: 0 1 24px;
+    border-bottom: 1.5px dotted rgba(238,243,238,0.3);
+    transform: translateY(-4px);
+    margin: 0 6px;
+  }
+  .item .price{
+    font-family:'Caveat', cursive;
+    font-size: 22px;
+    color: var(--accent-soft);
+    white-space:nowrap;
+  }
+
+  .item .name{ position:relative; }
+
+  .footer {
+    border-top: 1px dashed rgba(255,255,255,0.1);
+    padding: 60px 20px;
+    margin-top: 60px;
+    font-family: 'Inter', sans-serif;
+  }
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  .footer-left {
+    max-width: 380px;
+  }
+  .made-with-love {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(14px, 4.2vw, 28px);
+    color: var(--accent-soft);
+    margin-bottom: 12px;
+    white-space: nowrap;
+  }
+  .made-with-love a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 4px;
+  }
+  .made-with-love a:hover {
+    color: var(--accent);
+  }
+  .footer-left h3 {
+    font-size: 22px;
+    color: var(--chalk);
+    margin: 0 0 12px;
+    font-weight: 500;
+  }
+  .footer-left p {
+    color: var(--chalk-dim);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--chalk-dim);
+    font-size: 15px;
+  }
+  .contact-item a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 4px;
+    transition: color 0.2s;
+  }
+  .contact-item a:hover {
+    color: var(--accent-soft);
+  }
+  .contact-item svg {
+    width: 18px;
+    height: 18px;
+    color: var(--chalk-dim);
+  }
+  .portfolio-link {
+    display: inline-block;
+    margin-top: 16px;
+    color: var(--accent-soft);
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 4px;
+    font-size: 15px;
+  }
+  .portfolio-link:hover {
+    color: var(--accent);
+  }
+  @media (min-width: 768px) {
+    .footer-right { align-items: flex-end; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="eyebrow">good food, great vibes 🏔️</div>
+  <h1>Riders Cafe<span class="script">Kasol</span></h1>
+  <p class="tag">Breakfast, quick bites, Israeli food, main course &amp; the good cups of tea — scroll down, it's all here.</p>
+  <div class="call-btn-group">
+    <a href="tel:+910000000000" class="call-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      Call to Order
+    </a>
+  </div>
+  <a href="#breakfast" class="scroll-cue">
+    scroll for menu
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </a>
+</section>
+
+<nav class="nav">
+  <div class="nav-inner" id="navInner">
+    <a href="#drinks">Beverages</a>
+    <a href="#breakfast">Breakfast</a>
+    <a href="#bites">Quick Bites</a>
+    <a href="#maggi">Maggi &amp; Pasta</a>
+    <a href="#pizza">Pizza</a>
+    <a href="#mains">Main Course</a>
+    <a href="#israeli">Israeli Food</a>
+    <a href="#dessert">Desserts</a>
+  </div>
+</nav>
+
+<main>
+
+  <section class="section" id="drinks">
+    <div class="section-head"><span class="section-num">01</span><h2>Beverages &amp; Shakes</h2></div>
+    <hr class="divider">
+    
+    <h3>Hot Beverages</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Tea</span><span class="fill"></span><span class="price">₹50</span></div>
+      <div class="item"><span class="name">Green Tea</span><span class="fill"></span><span class="price">₹60</span></div>
+      <div class="item"><span class="name">Milk Coffee</span><span class="fill"></span><span class="price">₹70</span></div>
+      <div class="item"><span class="name">Black Coffee</span><span class="fill"></span><span class="price">₹50</span></div>
+      <div class="item"><span class="name">Black Tea</span><span class="fill"></span><span class="price">₹30</span></div>
+      <div class="item"><span class="name">Hot Chocolate</span><span class="fill"></span><span class="price">₹130</span></div>
+      <div class="item"><span class="name">Hot Milk</span><span class="fill"></span><span class="price">₹80</span></div>
+      <div class="item"><span class="name">Ginger Lemon Honey</span><span class="fill"></span><span class="price">₹80</span></div>
+      <div class="item"><span class="name">Hot Water</span><span class="fill"></span><span class="price">₹35</span></div>
+    </div>
+
+    <h3>Cold Beverages</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Package Water</span><span class="fill"></span><span class="price">₹30</span></div>
+      <div class="item"><span class="name">Soda</span><span class="fill"></span><span class="price">₹35</span></div>
+      <div class="item"><span class="name">Coke/Sprite/Fanta<span class="note">750ml</span></span><span class="fill"></span><span class="price">₹60</span></div>
+      <div class="item"><span class="name">Red Bull</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Hell</span><span class="fill"></span><span class="price">₹70</span></div>
+      <div class="item"><span class="name">Fresh Lemon Soda<span class="note">Sweet/Salted</span></span><span class="fill"></span><span class="price">₹60</span></div>
+      <div class="item"><span class="name">Butter Milk</span><span class="fill"></span><span class="price">₹60</span></div>
+    </div>
+
+    <h3>Fresh Juice</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Watermelon Juice</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Orange Juice</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Pineapple Juice</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Apple/Beetroot/Carrot</span><span class="fill"></span><span class="price">₹200</span></div>
+      <div class="item"><span class="name">Lemonana</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Lemon Juice</span><span class="fill"></span><span class="price">₹100</span></div>
+      <div class="item"><span class="name">Mix Fruit Juice</span><span class="fill"></span><span class="price">₹180</span></div>
+      <div class="item"><span class="name">Special Watermelon Juice</span><span class="fill"></span><span class="price">₹200</span></div>
+    </div>
+
+    <h3>Shakes &amp; Lassi</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Cold Coffee</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Oreo Shake</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Kitkat Shake</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Banana Shake</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Strawberry Shake</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Chocolate Shake</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Vanilla Shake</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Pineapple Shake</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Munch Nutella Shake</span><span class="fill"></span><span class="price">₹200</span></div>
+      <div class="item"><span class="name">Hide-Seek Shake</span><span class="fill"></span><span class="price">₹200</span></div>
+      <div class="item"><span class="name">Lassi<span class="note">Sweet/Salted</span></span><span class="fill"></span><span class="price">₹100</span></div>
+      <div class="item"><span class="name">Banana Lassi</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Rose Lassi</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Mango Lassi</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Strawberry Lassi</span><span class="fill"></span><span class="price">₹150</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="breakfast">
+    <div class="section-head"><span class="section-num">02</span><h2>Breakfast &amp; Eggs</h2></div>
+    <hr class="divider">
+    
+    <h3>Breakfast</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Aloo Paratha</span><span class="fill"></span><span class="price">₹90</span></div>
+      <div class="item"><span class="name">Gobhi Paratha</span><span class="fill"></span><span class="price">₹90</span></div>
+      <div class="item"><span class="name">Onion Paratha</span><span class="fill"></span><span class="price">₹90</span></div>
+      <div class="item"><span class="name">Mix Paratha</span><span class="fill"></span><span class="price">₹120</span></div>
+      <div class="item"><span class="name">Paneer Paratha</span><span class="fill"></span><span class="price">₹140</span></div>
+      <div class="item"><span class="name">Egg Paratha</span><span class="fill"></span><span class="price">₹140</span></div>
+      <div class="item"><span class="name">Plain Paratha</span><span class="fill"></span><span class="price">₹60</span></div>
+    </div>
+
+    <h3>Egg To Order</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Plain Omelet</span><span class="fill"></span><span class="price">₹100</span></div>
+      <div class="item"><span class="name">Masala Omelet</span><span class="fill"></span><span class="price">₹140</span></div>
+      <div class="item"><span class="name">Bread Masala Omelet</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Mushroom Omelet</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Cheese Omelet</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Egg Bhurji</span><span class="fill"></span><span class="price">₹100</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="bites">
+    <div class="section-head"><span class="section-num">03</span><h2>Quick Bites</h2></div>
+    <hr class="divider">
+    
+    <h3>Sandwich &amp; Toast</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Grilled Veg S/W</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Grilled Veg Cheese S/W</span><span class="fill"></span><span class="price">₹220</span></div>
+      <div class="item"><span class="name">Butter Toast</span><span class="fill"></span><span class="price">₹90</span></div>
+      <div class="item"><span class="name">Butter Jam Toast</span><span class="fill"></span><span class="price">₹120</span></div>
+      <div class="item"><span class="name">Nutella Toast</span><span class="fill"></span><span class="price">₹200</span></div>
+      <div class="item"><span class="name">Cheese Garlic Toast</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Omelet Veg Sandwich</span><span class="fill"></span><span class="price">₹180</span></div>
+      <div class="item"><span class="name">Omelet Sandwich</span><span class="fill"></span><span class="price">₹180</span></div>
+      <div class="item"><span class="name">Paneer Sandwich</span><span class="fill"></span><span class="price">₹200</span></div>
+      <div class="item"><span class="name">Cheese Olive Toast</span><span class="fill"></span><span class="price">₹220</span></div>
+    </div>
+
+    <h3>Burgers &amp; Snacks</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Veg Burger</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Veg Cheese Burger</span><span class="fill"></span><span class="price">₹200</span></div>
+      <div class="item"><span class="name">Paneer Cheese Burger</span><span class="fill"></span><span class="price">₹220</span></div>
+      <div class="item"><span class="name">Egg Cheese Burger</span><span class="fill"></span><span class="price">₹280</span></div>
+      <div class="item"><span class="name">Roasted Papad</span><span class="fill"></span><span class="price">₹50</span></div>
+      <div class="item"><span class="name">Fry Papad</span><span class="fill"></span><span class="price">₹80</span></div>
+      <div class="item"><span class="name">Masala Papad</span><span class="fill"></span><span class="price">₹100</span></div>
+      <div class="item"><span class="name">Masala Peanuts</span><span class="fill"></span><span class="price">₹140</span></div>
+      <div class="item"><span class="name">Roasted Peanuts</span><span class="fill"></span><span class="price">₹100</span></div>
+      <div class="item"><span class="name">Aloo Chat</span><span class="fill"></span><span class="price">₹120</span></div>
+      <div class="item"><span class="name">Chana Chat</span><span class="fill"></span><span class="price">₹140</span></div>
+    </div>
+
+    <h3>International Cuisine</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">French Fries</span><span class="fill"></span><span class="price">₹180</span></div>
+      <div class="item"><span class="name">Phir Phir French</span><span class="fill"></span><span class="price">₹190</span></div>
+      <div class="item"><span class="name">Veg Pakoda</span><span class="fill"></span><span class="price">₹220</span></div>
+      <div class="item"><span class="name">Onion Pakoda</span><span class="fill"></span><span class="price">₹200</span></div>
+      <div class="item"><span class="name">Paneer Pakoda</span><span class="fill"></span><span class="price">₹250</span></div>
+      <div class="item"><span class="name">Cheese Finger</span><span class="fill"></span><span class="price">₹250</span></div>
+      <div class="item"><span class="name">Chilli Paneer</span><span class="fill"></span><span class="price">₹300</span></div>
+      <div class="item"><span class="name">Honey Chilli Potato</span><span class="fill"></span><span class="price">₹280</span></div>
+      <div class="item"><span class="name">Chilli Sweet Corn</span><span class="fill"></span><span class="price">₹280</span></div>
+      <div class="item"><span class="name">Veg Noodles</span><span class="fill"></span><span class="price">₹290</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="maggi">
+    <div class="section-head"><span class="section-num">04</span><h2>Maggi &amp; Pasta</h2></div>
+    <hr class="divider">
+    
+    <h3>Maggi</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Plain Maggi</span><span class="fill"></span><span class="price">₹80</span></div>
+      <div class="item"><span class="name">Veg Maggi</span><span class="fill"></span><span class="price">₹120</span></div>
+      <div class="item"><span class="name">Butter Maggi</span><span class="fill"></span><span class="price">₹90</span></div>
+      <div class="item"><span class="name">Egg Maggi</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Cheese Maggi</span><span class="fill"></span><span class="price">₹150</span></div>
+    </div>
+
+    <h3>Pasta</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">All Arrabbiata<span class="note">Tomato Sauce, Garlic, Olive Oil, Chilli Cheese</span></span><span class="fill"></span><span class="price">₹350</span></div>
+      <div class="item"><span class="name">Tosca<span class="note">Tomato Sauce, Capsicum, Cheese</span></span><span class="fill"></span><span class="price">₹380</span></div>
+      <div class="item"><span class="name">Pizzaiala<span class="note">Tomato Sauce, Cheese, Capsicum, Olives, Mushroom</span></span><span class="fill"></span><span class="price">₹400</span></div>
+      <div class="item"><span class="name">Broccoli Pasta<span class="note">Broccoli, Tomato Sauce/White Sauce with Cheese</span></span><span class="fill"></span><span class="price">₹380</span></div>
+      <div class="item"><span class="name">White Sauce Pasta<span class="note">Amul Cream, Garlic, Olive oil, Cheese</span></span><span class="fill"></span><span class="price">₹350</span></div>
+      <div class="item"><span class="name">Mix Sauce Pasta</span><span class="fill"></span><span class="price">₹420</span></div>
+      <div class="item"><span class="name">Pesto Pasta</span><span class="fill"></span><span class="price">₹380</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="pizza">
+    <div class="section-head"><span class="section-num">05</span><h2>Pizza</h2></div>
+    <hr class="divider">
+    <div class="menu-grid">
+      <div class="item"><span class="name">Margherita<span class="note">Tomato Sauce, Cheese, Oregano</span></span><span class="fill"></span><span class="price">₹380</span></div>
+      <div class="item"><span class="name">Alle Olive<span class="note">Tomato Sauce, Olive, Cheese, Oregano</span></span><span class="fill"></span><span class="price">₹450</span></div>
+      <div class="item"><span class="name">Alle Melanzane<span class="note">Tomato Sauce, Capsicum, Mushroom, Egg Plant</span></span><span class="fill"></span><span class="price">₹480</span></div>
+      <div class="item"><span class="name">Alla Primavera<span class="note">Fresh Broccoli Black Olives, Sundried Tomato</span></span><span class="fill"></span><span class="price">₹480</span></div>
+      <div class="item"><span class="name">Quattro Stagioni<span class="note">Tomato Sauce, Capsicum, Mushroom, Cheese, Olive, Egg Plant</span></span><span class="fill"></span><span class="price">₹500</span></div>
+      <div class="item"><span class="name">Grano Turco<span class="note">Tomato Sauce, Corn, Onion, Cheese, Oregano</span></span><span class="fill"></span><span class="price">₹480</span></div>
+      <div class="item"><span class="name">Veg Corn Copia<span class="note">Tomato Sauce, Capsicum, Mushroom, Onion, Pineapple with Cheese, Olive Oil, Oregano</span></span><span class="fill"></span><span class="price">₹600</span></div>
+      <div class="item"><span class="name">Desi Tadka Pizza<span class="note">Tomato Sauce, Vegetable, Cheese, Olive Oil, Oregano</span></span><span class="fill"></span><span class="price">₹600</span></div>
+      <div class="item"><span class="name">Capo Pizza<span class="note">Tomato Sauce, Mushroom, Spinach, Capsicum, Onion, Cheese Oregano</span></span><span class="fill"></span><span class="price">₹500</span></div>
+      <div class="item"><span class="name">Pizza Marco's<span class="note">Tomato Sauce, Onion, Cappers, Olives, Capsicum, Cheese, Oregano</span></span><span class="fill"></span><span class="price">₹500</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="mains">
+    <div class="section-head"><span class="section-num">06</span><h2>Main Course</h2></div>
+    <hr class="divider">
+    
+    <h3>Khana Khajana</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Dal Fry</span><span class="fill"></span><span class="price">₹260</span></div>
+      <div class="item"><span class="name">Dal Tadka</span><span class="fill"></span><span class="price">₹280</span></div>
+      <div class="item"><span class="name">Mix Veg</span><span class="fill"></span><span class="price">₹300</span></div>
+      <div class="item"><span class="name">Aloo Gobhi</span><span class="fill"></span><span class="price">₹280</span></div>
+      <div class="item"><span class="name">Chana Masala</span><span class="fill"></span><span class="price">₹280</span></div>
+      <div class="item"><span class="name">Rajmah Masala</span><span class="fill"></span><span class="price">₹280</span></div>
+      <div class="item"><span class="name">Sev Tomato</span><span class="fill"></span><span class="price">₹240</span></div>
+      <div class="item"><span class="name">Palak Paneer</span><span class="fill"></span><span class="price">₹350</span></div>
+      <div class="item"><span class="name">Palak Corn</span><span class="fill"></span><span class="price">₹340</span></div>
+      <div class="item"><span class="name">Kadai Paneer</span><span class="fill"></span><span class="price">₹350</span></div>
+      <div class="item"><span class="name">Butter Paneer Masala</span><span class="fill"></span><span class="price">₹350</span></div>
+      <div class="item"><span class="name">Kadai Mushroom Masala</span><span class="fill"></span><span class="price">₹350</span></div>
+      <div class="item"><span class="name">Mutter Masala</span><span class="fill"></span><span class="price">₹280</span></div>
+      <div class="item"><span class="name">Jeera Aloo</span><span class="fill"></span><span class="price">₹220</span></div>
+      <div class="item"><span class="name">Mutter Paneer</span><span class="fill"></span><span class="price">₹320</span></div>
+    </div>
+
+    <h3>Pulao &amp; Rice</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Steam Rice</span><span class="fill"></span><span class="price">₹120</span></div>
+      <div class="item"><span class="name">Jeera Rice</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Peas Pulao</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Veg Pulao</span><span class="fill"></span><span class="price">₹180</span></div>
+      <div class="item"><span class="name">Paneer Pulao</span><span class="fill"></span><span class="price">₹200</span></div>
+      <div class="item"><span class="name">Veg Fried Rice</span><span class="fill"></span><span class="price">₹250</span></div>
+    </div>
+
+    <h3>Roti &amp; Thali</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Tawa Plain Roti</span><span class="fill"></span><span class="price">₹20</span></div>
+      <div class="item"><span class="name">Butter Tawa Roti</span><span class="fill"></span><span class="price">₹25</span></div>
+      <div class="item"><span class="name">Veg Thali<span class="note">Dal Fry, Mix Veg, 4 Roti, Plain Rice, Salad</span></span><span class="fill"></span><span class="price">₹320</span></div>
+      <div class="item"><span class="name">Dal Bati<span class="note">Butter Dal, 4 Pcs Bati (On Order Time: 1 Hour)</span></span><span class="fill"></span><span class="price">₹450</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="israeli">
+    <div class="section-head"><span class="section-num">07</span><h2>Israeli Food &amp; Sides</h2></div>
+    <hr class="divider">
+    
+    <h3>Israeli Food</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Labane</span><span class="fill"></span><span class="price">₹90</span></div>
+      <div class="item"><span class="name">Labane Pita</span><span class="fill"></span><span class="price">₹200</span></div>
+      <div class="item"><span class="name">Hummus Pita</span><span class="fill"></span><span class="price">₹200</span></div>
+      <div class="item"><span class="name">Falafel Plate<span class="note">Served with Pita, Salad, Chips &amp; Hummus</span></span><span class="fill"></span><span class="price">₹300</span></div>
+      <div class="item"><span class="name">Shakshuka Plate<span class="note">Served with Pita, Salad, Chips &amp; Thina</span></span><span class="fill"></span><span class="price">₹380</span></div>
+    </div>
+
+    <h3>Soup &amp; Salad</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Onion Mushroom Soup</span><span class="fill"></span><span class="price">₹180</span></div>
+      <div class="item"><span class="name">Tomato Soup</span><span class="fill"></span><span class="price">₹160</span></div>
+      <div class="item"><span class="name">Green Salad</span><span class="fill"></span><span class="price">₹100</span></div>
+      <div class="item"><span class="name">Onion Salad</span><span class="fill"></span><span class="price">₹80</span></div>
+      <div class="item"><span class="name">Kachumber Salad</span><span class="fill"></span><span class="price">₹120</span></div>
+      <div class="item"><span class="name">Israeli Salad</span><span class="fill"></span><span class="price">₹160</span></div>
+    </div>
+
+    <h3>Raita</h3>
+    <div class="menu-grid">
+      <div class="item"><span class="name">Veg Raita</span><span class="fill"></span><span class="price">₹120</span></div>
+      <div class="item"><span class="name">Boondi Raita</span><span class="fill"></span><span class="price">₹100</span></div>
+      <div class="item"><span class="name">Pineapple Raita</span><span class="fill"></span><span class="price">₹140</span></div>
+      <div class="item"><span class="name">Special Rider's Raita</span><span class="fill"></span><span class="price">₹140</span></div>
+      <div class="item"><span class="name">Plain Curd</span><span class="fill"></span><span class="price">₹60</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="dessert">
+    <div class="section-head"><span class="section-num">08</span><h2>Desserts</h2></div>
+    <hr class="divider">
+    <div class="menu-grid">
+      <div class="item"><span class="name">Chocolate Ball</span><span class="fill"></span><span class="price">₹150</span></div>
+      <div class="item"><span class="name">Banana Pancake</span><span class="fill"></span><span class="price">₹180</span></div>
+      <div class="item"><span class="name">Chocolate Pancake</span><span class="fill"></span><span class="price">₹180</span></div>
+      <div class="item"><span class="name">Honey Pancake</span><span class="fill"></span><span class="price">₹170</span></div>
+      <div class="item"><span class="name">Banana Honey Pancake</span><span class="fill"></span><span class="price">₹200</span></div>
+      <div class="item"><span class="name">Nutella Pancake</span><span class="fill"></span><span class="price">₹220</span></div>
+      <div class="item"><span class="name">Munch Nutella Pancake</span><span class="fill"></span><span class="price">₹250</span></div>
+    </div>
+  </section>
+
+</main>
+
+<div class="bottom-call">
+  <div class="call-btn-group" style="margin-bottom: 0;">
+    <a href="tel:+910000000000" class="call-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      Call to Order
+    </a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-left">
+      <div class="made-with-love">Designed and developed by Soham Lonkar</div>
+      <h3>Soham Lonkar</h3>
+      <p>Building high-performance web applications, AI-augmented systems, and scalable digital experiences.</p>
+      <a href="https://www.sohamlonkar.com/" target="_blank" class="portfolio-link">www.sohamlonkar.com</a>
+    </div>
+    <div class="footer-right">
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sohamlonkar1026@gmail.com" target="_blank">sohamlonkar1026@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        <a href="https://wa.me/919049235983" target="_blank">+91 90492 35983</a>
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        Pune, India
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.item');
+  items.forEach((el,i)=>{ el.style.animationDelay = (0.03*(i%8))+'s'; });
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.querySelectorAll('.item').forEach((it,i)=>{
+          it.style.animationPlayState = 'running';
+        });
+      }
+    });
+  },{threshold:0.1});
+  document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+
+  const navLinks = document.querySelectorAll('.nav a');
+  const sections = document.querySelectorAll('.section');
+  const navObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const id = entry.target.id;
+      const link = document.querySelector(`.nav a[href="#${id}"]`);
+      if(entry.isIntersecting){
+        navLinks.forEach(l=>l.classList.remove('active'));
+        if(link) link.classList.add('active');
+      }
+    });
+  },{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>navObserver.observe(s));
+</script>
+
+</body>
+</html>
