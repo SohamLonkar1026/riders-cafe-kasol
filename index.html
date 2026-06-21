@@ -24,7 +24,7 @@
     background: var(--board-dark);
     color: var(--chalk);
     font-family: 'Inter', sans-serif;
-    overflow-x:clip;
+    overflow-x:hidden;
   }
 
   /* chalk texture */
@@ -181,7 +181,6 @@
 
   /* NAV */
   .nav{
-    position: -webkit-sticky;
     position: sticky; top:0; z-index: 50;
     background: var(--wood-dark);
     border-bottom: 4px solid var(--wood);
@@ -210,6 +209,31 @@
     color: var(--accent-soft);
     border-color: rgba(232,163,61,0.5);
     background: rgba(232,163,61,0.08);
+  }
+
+  @media (max-width: 768px){
+    .nav{
+      overflow-x: visible;
+      white-space: normal;
+    }
+    .nav-inner{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      padding: 10px 14px;
+    }
+    .nav a{
+      font-size: 16px;
+      padding: 6px 4px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: normal;
+      line-height: 1.1;
+      border-radius: 8px;
+      min-height: 42px;
+    }
   }
 
 
