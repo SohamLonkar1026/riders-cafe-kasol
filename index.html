@@ -24,7 +24,7 @@
     background: var(--board-dark);
     color: var(--chalk);
     font-family: 'Inter', sans-serif;
-    overflow-x:hidden;
+    overflow-x:clip;
   }
 
   /* chalk texture */
@@ -181,6 +181,7 @@
 
   /* NAV */
   .nav{
+    position: -webkit-sticky;
     position: sticky; top:0; z-index: 50;
     background: var(--wood-dark);
     border-bottom: 4px solid var(--wood);
